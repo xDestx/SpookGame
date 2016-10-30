@@ -16,5 +16,11 @@ public class Useable extends GameObject {
 		
 
 	}
+	public char getType(){
+		return type;
+	}
+	public int getDur(){
+		return duration;
+	}
 
 }

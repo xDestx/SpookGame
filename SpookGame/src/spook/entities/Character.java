@@ -71,7 +71,6 @@ public class Character extends GameObject {
 			mw.getUpgrade(touched);
 		}
 		else if(touched.type() == 'P'){
-			
 		}
 		else{
 			throw new Exception();
@@ -82,6 +81,22 @@ public class Character extends GameObject {
 			Useable temp = use;
 		}
 		use = u;
+	}
+	public void useUseable(){
+		if(use != null){
+			if(use.getType() == 'H'){
+				double temp = maxHp * .5;
+				if(temp + hp > maxHp){
+					hp = maxHp;
+				}
+				else{
+					hp = hp + temp;
+				}
+			}
+			else if(use.getType() == 'S'){
+				
+			}
+		}
 	}
 
 }
