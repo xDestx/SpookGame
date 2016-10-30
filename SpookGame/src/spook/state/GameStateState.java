@@ -189,4 +189,8 @@ public class GameStateState extends GameState {
 		return player;
 	}
 
+	public List<GameObject> getGameObjects() {
+		return go;
+	}
+
 }

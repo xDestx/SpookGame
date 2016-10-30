@@ -26,7 +26,7 @@ public class Enemy extends GameObject {
 		if(hp <= 0.0){
 			double chance = (int)(Math.random()*10);
 			if(chance == 0){
-				int typeChance = (int)(Math.random() * 5);
+				int typeChance = (int)(Math.random() * 4);
 				char ch = ' ';
 				if(typeChance == 0){
 					ch = 'D';
@@ -35,9 +35,6 @@ public class Enemy extends GameObject {
 					ch = 'S';
 				}
 				else if (typeChance == 2){
-					ch = 'F';
-				}
-				else if (typeChance == 3){
 					ch = 'J';
 				}
 				else{
@@ -59,5 +56,8 @@ public class Enemy extends GameObject {
 	}
 	public double getMaxHp(){
 		return maxHp;
+	}
+	public Hitbox getHitbox(){
+		return hit;
 	}
 }
