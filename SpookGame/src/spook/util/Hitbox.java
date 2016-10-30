@@ -27,6 +27,16 @@ public class Hitbox {
 		return new Rectangle((int)l.getX(),(int)l.getY(),w,h);
 	}
 	
+	public void addX(double x)
+	{
+		this.l.addX(x);
+	}
+	
+	public void addY(double y)
+	{
+		this.l.addY(y);
+	}
+	
 	public void setX(double x)
 	{
 		this.l.setX(x);
@@ -37,4 +47,8 @@ public class Hitbox {
 		this.l.setY(y);
 	}
 	
+	public Location getLocation()
+	{
+		return this.l;
+	}
 }

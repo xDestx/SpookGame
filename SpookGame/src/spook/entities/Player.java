@@ -36,7 +36,7 @@ public class Player extends GameObject implements Anchor, Renderable {
 		speed = 10;
 		jumpHeight = 200;
 		velocity = new Velocity(0,0);
-		hitbox = new Hitbox(50, 50, l);
+		hitbox = new Hitbox(70, 70, l);
 		use = null;
 	}
 
@@ -58,6 +58,8 @@ public class Player extends GameObject implements Anchor, Renderable {
 			gs.gameOver();
 		}
 		velocity.addY((double)Game.GRAVITY/(double)Game.TPS);
+		hitbox.addY(velocity.getY());
+		hitbox.addX(velocity.getX());
 
 	}
 
@@ -112,14 +114,13 @@ public class Player extends GameObject implements Anchor, Renderable {
 
 	@Override
 	public Hitbox getHitbox() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return hitbox;
 	}
 
 	@Override
 	public Location getLocation() {
-		// TODO Auto-generated method stub
-		return null;
+		return hitbox.getLocation();
 	}
 	
 	

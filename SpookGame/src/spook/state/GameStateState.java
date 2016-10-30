@@ -32,7 +32,7 @@ public class GameStateState extends GameState {
 		re = new LinkedList<Renderable>();
 		currentWorld = World.getWorld(0);
 		camera = new Camera(new Location(0,0,currentWorld), Game.WIDTH, Game.HEIGHT);
-		player = new Player("Freddy",new Location(0,0,currentWorld));
+		player = new Player("Freddy",new Location(0,-50,currentWorld));
 		addObject(player);
 		camera.setAnchor((Anchor)player);
 	}
