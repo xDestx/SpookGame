@@ -87,11 +87,24 @@ public class Player extends GameObject implements Anchor, Renderable {
 	public void handleUpgrade(Upgrade touched) throws Exception {
 		if (touched.type() == 'R') {
 			rw.getUpgrade(touched);
-		} else if (touched.type() == 'M') {
+		} 
+		
+		else if (touched.type() == 'M') {
 			mw.getUpgrade(touched);
-		} else if (touched.type() == 'P') {
-
-		} else {
+		} 
+		
+		else if (touched.type() == 'P') {
+			if(touched.subtype() == 'H'){
+				getHpUp();
+			}
+			else if(touched.subtype() == 'J'){
+				getJumpUp();
+			}
+			else{
+				getSpUp();
+			}
+		} 
+		else {
 			throw new Exception();
 		}
 	}
