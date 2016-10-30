@@ -1,18 +1,22 @@
 package spook.entities;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 import spook.Game;
 import spook.GameObject;
+import spook.graphic.Renderable;
 import spook.items.Upgrade;
 import spook.items.Useable;
 import spook.state.GameStateState;
+import spook.util.Anchor;
 import spook.util.Hitbox;
 import spook.util.Location;
 import spook.util.Velocity;
 import spook.weapons.MeleeWeapon;
 import spook.weapons.RangedWeapon;
-import spook.world.World;
 
-public class Player extends GameObject {
+public class Player extends GameObject implements Anchor, Renderable {
 	private double hp, maxHp, jumpHeight, speed;
 	private String name;
 	private Hitbox hitbox;
@@ -97,6 +101,25 @@ public class Player extends GameObject {
 			Useable temp = use;
 		}
 		use = u;
+	}
+
+	@Override
+	public void render(Graphics g, int xoff, int yoff) {
+		Color last = g.getColor();
+		g.setColor(Color.WHITE);
+		g.fillRect(xoff, yoff, (int)hitbox.getBounds().getWidth(),(int) hitbox.getBounds().getHeight());
+	}
+
+	@Override
+	public Hitbox getHitbox() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Location getLocation() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
