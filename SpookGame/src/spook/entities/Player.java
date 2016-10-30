@@ -92,6 +92,9 @@ public class Player extends GameObject implements Anchor, Renderable {
 
 	@Override
 	public void tick(GameStateState gs) {
+		if(this.getHitbox().getLocation().getX() >= 3300){
+			gs.win();
+		}
 		if (hp <= 0.0) {
 			gs.gameOver();
 		}
