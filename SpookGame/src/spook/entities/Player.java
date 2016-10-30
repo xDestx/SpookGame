@@ -18,12 +18,12 @@ import spook.util.Velocity;
 import spook.world.WorldObject;
 
 public class Player extends GameObject implements Anchor, Renderable {
-	private double hp, maxHp, jumpHeight, speed;
+	private double hp, maxHp, jumpHeight, speed, dmgMod;
 	private String name;
 	private boolean rightHeld, leftHeld;
 	private Hitbox hitbox;
 	private Velocity velocity;
-	private int hpUpgrades, speedUpgrades, jumpUpgrades;
+	private int hpUpgrades, speedUpgrades, jumpUpgrades,shootSpeed;
 	private Useable use;
 	private boolean canJump;
 
@@ -36,6 +36,8 @@ public class Player extends GameObject implements Anchor, Renderable {
 		hp = 100.0;
 		maxHp = 100.0;
 		speed = 220;
+		dmgMod = 20;
+		shootSpeed = 20;
 		jumpHeight = 1;
 		rightHeld = false;
 		leftHeld = false;
@@ -180,6 +182,7 @@ public class Player extends GameObject implements Anchor, Renderable {
 		else if(touched.type() == 'F'){
 			getFireSpeedUp();
 		}
+	}
 
 	public void getUseable(Useable u) {
 		use = u;
