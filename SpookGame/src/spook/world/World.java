@@ -43,6 +43,13 @@ public class World {
 		world1.addWorldObject(new WorldObject(world1, 0,20,400,80, Color.RED));
 		world1.addWorldObject(new WorldObject(world1, 400,-20,200,120,Color.RED));
 		world1.addWorldObject(new WorldObject(world1, -900,-900,900,1000, Color.RED));
+		world1.addWorldObject(new WorldObject(world1, 600,20,100,80, Color.RED));
+		world1.addWorldObject(new WorldObject(world1, 700,90, 800, 10, Color.RED));
+		world1.addWorldObject(new WorldObject(world1, 900, -20, 400, 10, Color.RED));
+		world1.addWorldObject(new WorldObject(world1, 1500,20,600,80, Color.RED));
+		world1.addWorldObject(new WorldObject(world1, 2300, -20, 400, 10, Color.RED));
+		world1.addWorldObject(new WorldObject(world1, 2900,20,600,80, Color.RED));
+		world1.addWorldObject(new WorldObject(world1, 3500,-900,900,1000, Color.RED));
 		
 		
 		World world2 = new World(1);
