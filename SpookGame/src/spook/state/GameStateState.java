@@ -147,6 +147,11 @@ public class GameStateState extends GameState {
 		{
 			player.setRightHeld(true);
 		}
+		if(e.getKeyCode() == KeyEvent.VK_W)
+		{
+			player.jump();
+
+		}
 	}
 
 	@Override
