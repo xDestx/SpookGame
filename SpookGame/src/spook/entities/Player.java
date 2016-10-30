@@ -2,6 +2,7 @@ package spook.entities;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import spook.Game;
 import spook.GameObject;
@@ -15,6 +16,7 @@ import spook.util.Location;
 import spook.util.Velocity;
 import spook.weapons.MeleeWeapon;
 import spook.weapons.RangedWeapon;
+import spook.world.WorldObject;
 
 public class Player extends GameObject implements Anchor, Renderable {
 	private double hp, maxHp, jumpHeight, speed;
@@ -58,8 +60,12 @@ public class Player extends GameObject implements Anchor, Renderable {
 			gs.gameOver();
 		}
 		velocity.addY((double)Game.GRAVITY/(double)Game.TPS);
+		for(WorldObject wo: gs.getCurrentWorld().getWorldObjects()){
+			wo.getHitbox().getBounds().intersects(getBottomBound());
+		}
 
 	}
+
 
 	public void getHpUp() {
 		if (hpUpgrades < 3) {
