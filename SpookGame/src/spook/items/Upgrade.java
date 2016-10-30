@@ -4,7 +4,7 @@ import spook.GameObject;
 import spook.state.GameStateState;
 
 public class Upgrade extends GameObject {
-	private char type, subtype;
+	private char type;
 	public Upgrade(char t){
 		type = t;
 	}

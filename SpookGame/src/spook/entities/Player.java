@@ -50,6 +50,9 @@ public class Player extends GameObject implements Anchor, Renderable {
 	{
 		return canJump;
 	}
+	public void attack(){
+		
+	}
 	
 	public void setCanJump(boolean jump) {
 		this.canJump=jump;

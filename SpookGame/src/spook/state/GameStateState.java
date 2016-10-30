@@ -152,6 +152,9 @@ public class GameStateState extends GameState {
 			player.jump();
 
 		}
+		if(e.getKeyCode() == KeyEvent.VK_SPACE){
+			player.attack();
+		}
 	}
 
 	@Override
