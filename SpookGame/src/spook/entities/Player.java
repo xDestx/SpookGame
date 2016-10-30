@@ -15,11 +15,17 @@ import spook.util.Anchor;
 import spook.util.Hitbox;
 import spook.util.Location;
 import spook.util.Velocity;
+<<<<<<< HEAD
 import spook.world.WorldObject;
+=======
+import spook.weapons.MeleeWeapon;
+import spook.weapons.RangedWeapon;
+>>>>>>> refs/remotes/origin/master
 
 public class Player extends GameObject implements Anchor, Renderable {
 	private double hp, maxHp, jumpHeight, speed, dmgMod;
 	private String name;
+	private boolean rightHeld, leftHeld;
 	private Hitbox hitbox;
 	private Velocity velocity;
 	private int hpUpgrades, speedUpgrades, jumpUpgrades, shootSpeed;
@@ -32,8 +38,10 @@ public class Player extends GameObject implements Anchor, Renderable {
 		jumpUpgrades = 0;
 		hp = 100.0;
 		maxHp = 100.0;
-		speed = 10;
-		jumpHeight = 200;
+		speed = 170;
+		jumpHeight = 1;
+		rightHeld = false;
+		leftHeld = false;
 		velocity = new Velocity(0,0);
 		hitbox = new Hitbox(70, 70, l);
 		use = null;
@@ -41,6 +49,26 @@ public class Player extends GameObject implements Anchor, Renderable {
 		dmgMod = 20;
 	}
 
+	public void setRightHeld(boolean r)
+	{
+		this.rightHeld = r;
+	}
+	
+	public void setLeftHeld(boolean r)
+	{
+		this.leftHeld = r;
+	}
+	
+	public boolean getRightHeld()
+	{
+		return this.rightHeld;
+	}
+	
+	public boolean getLeftHeld()
+	{
+		return this.leftHeld;
+	}
+	
 	public void takeDmg(double dmg) {
 		hp -= dmg;
 	}
@@ -58,20 +86,22 @@ public class Player extends GameObject implements Anchor, Renderable {
 		if (hp <= 0.0) {
 			gs.gameOver();
 		}
-		velocity.addY((double)Game.GRAVITY/(double)Game.TPS);
-
 		for(WorldObject wo: gs.getCurrentWorld().getWorldObjects()){
 			if(wo.getHitbox().getBounds().intersects(getBottomBound())){
 				velocity.setY(0);
 			}
 		}
-
-		hitbox.addY(velocity.getY());
-		hitbox.addX(velocity.getX());
-
-
+		velocity.addY((double)Game.GRAVITY/(double)Game.TPS);
+		hitbox.addY(velocity.getY()/(double)Game.TPS);
+		hitbox.addX(velocity.getX()/(double)Game.TPS);
+		double xchange = 0;
+		if(getLeftHeld())
+			xchange=-speed;
+		if(getRightHeld())
+			xchange=speed;
+		hitbox.addX(xchange/(double)Game.TPS);
+		
 	}
-
 
 	public void getHpUp() {
 		if (hpUpgrades < 3) {
@@ -95,16 +125,54 @@ public class Player extends GameObject implements Anchor, Renderable {
 			jumpHeight *= 1.25;
 		}
 	}
+<<<<<<< HEAD
 	public void getDmgUp() {
 			dmgMod = (int)(dmgMod * 1.25);
 	}
 	public void getFireSpeedUp() {
 			shootSpeed = (int)(shootSpeed * 1.25);
+=======
+	
+	public void jump()
+	{
+		velocity.setY(-jumpHeight*10);
 	}
 
+	public void handleUpgrade(Upgrade touched) throws Exception {
+		if (touched.type() == 'R') {
+			rw.getUpgrade(touched);
+		} 
+		
+		else if (touched.type() == 'M') {
+			mw.getUpgrade(touched);
+		} 
+		
+		else if (touched.type() == 'P') {
+			if(touched.subtype() == 'H'){
+				getHpUp();
+			}
+			else if(touched.subtype() == 'J'){
+				getJumpUp();
+			}
+			else{
+				getSpUp();
+			}
+		} 
+		else {
+			throw new Exception();
+		}
+>>>>>>> refs/remotes/origin/master
+	}
+
+<<<<<<< HEAD
 	public void handleUpgrade(Upgrade touched){
 		if(touched.type() == 'H'){
 			getHpUp();
+=======
+	public void getUseable(Useable u) {
+		if (use != null) {
+			Useable temp = use;
+>>>>>>> refs/remotes/origin/master
 		}
 		else if(touched.type() == 'J'){
 			getJumpUp();

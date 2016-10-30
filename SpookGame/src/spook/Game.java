@@ -2,6 +2,7 @@ package spook;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -159,6 +160,8 @@ public class Game {
 		this.setGameState(mms);
 		frame.setVisible(true);
 		MouseWatcher mw = new MouseWatcher(this);
+		KeyWatcher kw = new KeyWatcher(this);
+		c.addKeyListener(kw);
 		c.addMouseListener(mw);
 		c.addMouseMotionListener(mw);
 		if(c.getBufferStrategy() == null)
@@ -237,5 +240,27 @@ public class Game {
 		{
 			g.mouseReleased(e);
 		}
+	}
+	class KeyWatcher extends KeyAdapter {
+		
+		private Game g;
+		
+		public KeyWatcher(Game g)
+		{
+			this.g = g;
+		}
+		
+		@Override
+		public void keyPressed(KeyEvent e)
+		{
+			g.keyPressed(e);
+		}
+		
+		@Override
+		public void keyReleased(KeyEvent e)
+		{
+			g.keyReleased(e);
+		}
+	
 	}
 }

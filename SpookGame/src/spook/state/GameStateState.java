@@ -139,14 +139,26 @@ public class GameStateState extends GameState {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		if (e.getKeyCode() == KeyEvent.VK_A)
+		{
+			player.setLeftHeld(true);
+		}
+		if (e.getKeyCode() == KeyEvent.VK_D)
+		{
+			player.setRightHeld(true);
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		if (e.getKeyCode() == KeyEvent.VK_A)
+		{
+			player.setLeftHeld(false);
+		}
+		if (e.getKeyCode() == KeyEvent.VK_D)
+		{
+			player.setRightHeld(false);
+		}
 	}
 
 	@Override
