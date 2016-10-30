@@ -1,6 +1,7 @@
 package spook.entities;
 
 import spook.GameObject;
+import spook.state.GameStateState;
 
 public class Enemy extends GameObject {
 	private double hp, maxHp;
@@ -12,10 +13,11 @@ public class Enemy extends GameObject {
 		hp-=dmg;
 	}
 	@Override
-	public void tick() {
+	public void tick(GameStateState gs) {
 		if(hp <= 0.0){
 			
 		}
+
 	}
 	public double getCurrentHp(){
 		return hp;

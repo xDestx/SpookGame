@@ -1,6 +1,7 @@
 package spook.weapons;
 
 import spook.items.Upgrade;
+import spook.state.GameStateState;
 
 public class MeleeWeapon extends Weapon {
 	private int dmg, range;
@@ -12,7 +13,7 @@ public class MeleeWeapon extends Weapon {
 		range = r;
 		upgrades = new Upgrade[2];
 	}
-	public void tick() {
+	public void tick(GameStateState gs) {
 		
 
 	}
@@ -30,4 +31,5 @@ public class MeleeWeapon extends Weapon {
 	public int getDmg(){
 		return dmg;
 	}
+
 }

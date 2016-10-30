@@ -137,5 +137,10 @@ public class GameStateState extends GameState {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void gameOver() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

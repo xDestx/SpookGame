@@ -1,6 +1,7 @@
 package spook.entities;
 
 import spook.GameObject;
+import spook.state.GameStateState;
 
 public class Character extends GameObject {
 	private double hp, maxHp, jumpHeight, speed;
@@ -27,10 +28,11 @@ public class Character extends GameObject {
 		return maxHp;
 	}
 	@Override
-	public void tick() {
+	public void tick(GameStateState gs) {
 		if(hp <= 0.0){
-			
+			gs.gameOver();
 		}
+
 	}
 	public void getHpUp(){
 		if(hpUpgrades < 3){
@@ -53,5 +55,8 @@ public class Character extends GameObject {
 		}
 	}
 	
+	public void handleUpgrade(Upgrade touched){
+		
+	}
 
 }
