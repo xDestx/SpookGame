@@ -39,7 +39,7 @@ public class Player extends GameObject implements Anchor, Renderable {
 		jumpUpgrades = 0;
 		hp = 100.0;
 		maxHp = 100.0;
-		speed = 170;
+		speed = 220;
 		jumpHeight = 1;
 		rightHeld = false;
 		leftHeld = false;
@@ -95,22 +95,41 @@ public class Player extends GameObject implements Anchor, Renderable {
 			gs.gameOver();
 		}
 		for(WorldObject wo: gs.getCurrentWorld().getWorldObjects()){
-			if(wo.getHitbox().getBounds().intersects(getBottomBound())){
-				velocity.setY(0);
-				hitbox.setY(wo.getHitbox().getLocation().getY()-hitbox.getBounds().getHeight());
-				setCanJump(true);
-			}
+			
 		}
 		velocity.addY((double)Game.GRAVITY/(double)Game.TPS);
 		hitbox.addY(velocity.getY()/(double)Game.TPS);
 		hitbox.addX(velocity.getX()/(double)Game.TPS);
+		velocity.addX((velocity.getX()*-.9)/(double)Game.TPS);
+		if(velocity.getX() < 50)
+			velocity.setX(0);
 		double xchange = 0;
 		if(getLeftHeld())
 			xchange=-speed;
 		if(getRightHeld())
 			xchange=speed;
 		hitbox.addX(xchange/(double)Game.TPS);
-		
+		for(WorldObject wo: gs.getCurrentWorld().getWorldObjects()){
+			if(wo.getHitbox().getBounds().intersects(getLeftBound())){
+				velocity.setX(0);
+				hitbox.setX(wo.getHitbox().getLocation().getX()+wo.getHitbox().getBounds().getWidth());
+			}
+			if(wo.getHitbox().getBounds().intersects(getRightBound())){
+				velocity.setX(0);
+				hitbox.setX(wo.getHitbox().getLocation().getX()-hitbox.getBounds().getWidth());
+			}
+			if(wo.getHitbox().getBounds().intersects(getTopBound())){
+				velocity.setY(0);
+				hitbox.setY(wo.getHitbox().getLocation().getY()+wo.getHitbox().getBounds().getHeight());
+			}
+			if(wo.getHitbox().getBounds().intersects(getBottomBound())){
+				velocity.setY(0);
+				hitbox.setY(wo.getHitbox().getLocation().getY()-hitbox.getBounds().getHeight());
+				setCanJump(true);
+			}
+		}
+		if(hitbox.getLocation().getY() > 5000)
+			this.takeDmg(this.maxHp);
 	}
 
 	public void getHpUp() {
@@ -140,7 +159,7 @@ public class Player extends GameObject implements Anchor, Renderable {
 	{
 		if(!canJump)
 			return;
-		velocity.setY(-jumpHeight*1000);
+		velocity.setY(-jumpHeight*400);
 		hitbox.addY(-5);
 		canJump = false;
 	}
@@ -182,6 +201,7 @@ public class Player extends GameObject implements Anchor, Renderable {
 		Color last = g.getColor();
 		g.setColor(Color.WHITE);
 		g.fillRect(xoff, yoff, (int)hitbox.getBounds().getWidth(),(int) hitbox.getBounds().getHeight());
+		
 	//	drawHitBoxes(g,xoff,yoff);
 	}
 

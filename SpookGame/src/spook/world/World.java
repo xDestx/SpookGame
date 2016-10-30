@@ -40,7 +40,10 @@ public class World {
 		worlds = new ArrayList<World>();
 		
 		World world1 = new World(0);
-		world1.addWorldObject(new WorldObject(world1, 0,20,100,20, Color.RED));
+		world1.addWorldObject(new WorldObject(world1, 0,20,400,80, Color.RED));
+		world1.addWorldObject(new WorldObject(world1, 400,-20,200,120,Color.RED));
+		world1.addWorldObject(new WorldObject(world1, -900,-900,900,1000, Color.RED));
+		
 		
 		World world2 = new World(1);
 		
