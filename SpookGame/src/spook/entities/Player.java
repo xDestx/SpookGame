@@ -20,10 +20,10 @@ import spook.world.WorldObject;
 public class Player extends GameObject implements Anchor, Renderable {
 	private double hp, maxHp, jumpHeight, speed, dmgMod;
 	private String name;
-	private boolean rightHeld, leftHeld;
+	private boolean rightHeld, leftHeld, attacking;
 	private Hitbox hitbox;
 	private Velocity velocity;
-	private int hpUpgrades, speedUpgrades, jumpUpgrades,shootSpeed;
+	private int hpUpgrades, speedUpgrades, jumpUpgrades;
 	private Useable use;
 	private boolean canJump;
 
@@ -37,13 +37,13 @@ public class Player extends GameObject implements Anchor, Renderable {
 		maxHp = 100.0;
 		speed = 220;
 		dmgMod = 20;
-		shootSpeed = 20;
 		jumpHeight = 1;
 		rightHeld = false;
 		leftHeld = false;
 		velocity = new Velocity(0,0);
 		hitbox = new Hitbox(70, 70, l);
 		use = null;
+		attacking = false;
 	}
 	
 	public boolean canJump()
@@ -51,8 +51,7 @@ public class Player extends GameObject implements Anchor, Renderable {
 		return canJump;
 	}
 	public void attack(){
-		Hitbox newHit = new Hitbox(150, 150, new Location(this.getHitbox().getLocation().getX()-75, this.getHitbox().getLocation().getY()-75,this.getHitbox().getLocation().getWorld()));
-		
+		attacking = true;
 	}
 	
 	public void setCanJump(boolean jump) {
@@ -129,6 +128,16 @@ public class Player extends GameObject implements Anchor, Renderable {
 		}
 		if(hitbox.getLocation().getY() > 5000)
 			this.takeDmg(this.maxHp);
+		if(attacking){
+			Hitbox newHit = new Hitbox(150, 150, new Location(this.getHitbox().getLocation().getX()-75, this.getHitbox().getLocation().getY()-75,this.getHitbox().getLocation().getWorld()));
+			for(GameObject go: gs.getGameObjects()){
+				if(go instanceof Enemy && newHit.getBounds().intersects(((Enemy) go).getHitbox().getBounds())){
+					((Enemy) go).takeDmg(dmgMod);
+				}
+				
+			}
+			attacking = false;
+		}
 	}
 
 	public void getHpUp() {
@@ -157,10 +166,6 @@ public class Player extends GameObject implements Anchor, Renderable {
 	public void getDmgUp() {
 			dmgMod = (int)(dmgMod * 1.25);
 	}
-	public void getFireSpeedUp() {
-			shootSpeed = (int)(shootSpeed * 1.25);
-	}
-	
 	public void jump()
 	{
 		if(!canJump)
@@ -182,9 +187,6 @@ public class Player extends GameObject implements Anchor, Renderable {
 		}
 		else if(touched.type() == 'D'){
 			getDmgUp();
-		}
-		else if(touched.type() == 'F'){
-			getFireSpeedUp();
 		}
 	}
 
