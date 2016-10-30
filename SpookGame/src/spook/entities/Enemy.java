@@ -13,6 +13,7 @@ import spook.util.ImageLoader;
 public class Enemy extends GameObject implements Renderable {
 	private double hp, maxHp;
 	private boolean isBoss;
+	private double tickCounter;
 	private Hitbox hit;
 	private int costick;
 	
@@ -28,7 +29,10 @@ public class Enemy extends GameObject implements Renderable {
 	}
 	@Override
 	public void tick(GameStateState gs) {
-		
+		tickCounter++;
+		if(tickCounter%100 == 0 && gs.getPlayer().getHitbox().getBounds().intersects(this.getHitbox().getBounds())){
+			gs.getPlayer().takeDmg(20);
+		}
 		if(hp <= 0.0){
 			double chance = (int)(Math.random()*10);
 			if(chance == 0){
