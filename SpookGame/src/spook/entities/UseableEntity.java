@@ -5,6 +5,7 @@ import spook.items.Upgrade;
 import spook.items.Useable;
 import spook.state.GameStateState;
 import spook.util.Hitbox;
+import spook.util.Location;
 
 public class UseableEntity extends GameObject {
 	private Useable use;
@@ -16,10 +17,7 @@ public class UseableEntity extends GameObject {
 	public void tick(GameStateState gs) {
 		Player p = gs.getPlayer();
 		if(p.getHitbox().getBounds().intersects(hit.getBounds())){
-			Useable temp = p.getUseable(use);
-			if(temp != null){
-				//Add UseableEntity w/ temp
-			}
+			p.getUseable(use);
 			gs.removeGameObject(this);
 		}
 

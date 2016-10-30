@@ -16,10 +16,7 @@ public class UpgradeEntity extends GameObject {
 	public void tick(GameStateState gs) {
 		Player p = gs.getPlayer();
 		if(p.getHitbox().getBounds().intersects(hit.getBounds())){
-			Upgrade temp = p.handleUpgrade(up);
-			if(temp != null){
-				//Create UpgradeEntity w/ temp
-			}
+			p.handleUpgrade(up);
 			gs.removeGameObject(this);
 		}
 

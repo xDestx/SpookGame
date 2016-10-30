@@ -15,19 +15,15 @@ import spook.util.Anchor;
 import spook.util.Hitbox;
 import spook.util.Location;
 import spook.util.Velocity;
-import spook.weapons.MeleeWeapon;
-import spook.weapons.RangedWeapon;
 import spook.world.WorldObject;
 
 public class Player extends GameObject implements Anchor, Renderable {
-	private double hp, maxHp, jumpHeight, speed;
+	private double hp, maxHp, jumpHeight, speed, dmgMod;
 	private String name;
 	private Hitbox hitbox;
 	private Velocity velocity;
-	private int hpUpgrades, speedUpgrades, jumpUpgrades;
+	private int hpUpgrades, speedUpgrades, jumpUpgrades, shootSpeed;
 	private Useable use;
-	private MeleeWeapon mw;
-	private RangedWeapon rw;
 
 	public Player(String n, Location l) {
 		name = n;
@@ -41,6 +37,8 @@ public class Player extends GameObject implements Anchor, Renderable {
 		velocity = new Velocity(0,0);
 		hitbox = new Hitbox(70, 70, l);
 		use = null;
+		shootSpeed = 20;
+		dmgMod = 20;
 	}
 
 	public void takeDmg(double dmg) {
@@ -97,38 +95,33 @@ public class Player extends GameObject implements Anchor, Renderable {
 			jumpHeight *= 1.25;
 		}
 	}
-
-	public Upgrade handleUpgrade(Upgrade touched){
-		Upgrade dropped = null;
-		if (touched.type() == 'R') {
-			return rw.getUpgrade(touched);
-		} 
-		
-		else if (touched.type() == 'M') {
-			return mw.getUpgrade(touched);
-		} 
-		
-		else if (touched.type() == 'P') {
-			if(touched.subtype() == 'H'){
-				getHpUp();
-			}
-			else if(touched.subtype() == 'J'){
-				getJumpUp();
-			}
-			else{
-				getSpUp();
-			}
-		} 
-		return null;
+	public void getDmgUp() {
+			dmgMod = (int)(dmgMod * 1.25);
+	}
+	public void getFireSpeedUp() {
+			shootSpeed = (int)(shootSpeed * 1.25);
 	}
 
-	public Useable getUseable(Useable u) {
-		Useable temp = null;
-		if (use != null) {
-			temp = use;
+	public void handleUpgrade(Upgrade touched){
+		if(touched.type() == 'H'){
+			getHpUp();
 		}
+		else if(touched.type() == 'J'){
+			getJumpUp();
+		}
+		else if(touched.type() == 'S'){
+			getSpUp();
+		}
+		else if(touched.type() == 'D'){
+			getDmgUp();
+		}
+		else if(touched.type() == 'F'){
+			getFireSpeedUp();
+		}
+	}
+
+	public void getUseable(Useable u) {
 		use = u;
-		return temp;
 	}
 
 	@Override
