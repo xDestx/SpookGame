@@ -12,6 +12,7 @@ import spook.Game;
 import spook.GameObject;
 import spook.entities.Player;
 import spook.graphic.Renderable;
+import spook.util.Anchor;
 import spook.util.Location;
 import spook.world.World;
 import spook.world.WorldObject;
@@ -32,6 +33,8 @@ public class GameStateState extends GameState {
 		currentWorld = World.getWorld(0);
 		camera = new Camera(new Location(0,0,currentWorld), Game.WIDTH, Game.HEIGHT);
 		player = new Player("Freddy",new Location(0,0,currentWorld));
+		addObject(player);
+		camera.setAnchor((Anchor)player);
 	}
 	
 	public void addObject(GameObject o)
