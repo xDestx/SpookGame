@@ -17,7 +17,11 @@ public class Enemy extends GameObject {
 	@Override
 	public void tick(GameStateState gs) {
 		if(hp <= 0.0){
-			
+			double chance = (int)(Math.random()*10);
+			if(chance < 2){
+				//Spawn a random Useable/Upgrade Entity
+			}
+			gs.removeGameObject(this);
 		}
 
 	}

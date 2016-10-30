@@ -16,7 +16,10 @@ public class UseableEntity extends GameObject {
 	public void tick(GameStateState gs) {
 		Player p = gs.getPlayer();
 		if(p.getHitbox().getBounds().intersects(hit.getBounds())){
-			p.getUseable(use);
+			Useable temp = p.getUseable(use);
+			if(temp != null){
+				//Add UseableEntity w/ temp
+			}
 			gs.removeGameObject(this);
 		}
 
