@@ -61,7 +61,9 @@ public class Player extends GameObject implements Anchor, Renderable {
 		}
 		velocity.addY((double)Game.GRAVITY/(double)Game.TPS);
 		for(WorldObject wo: gs.getCurrentWorld().getWorldObjects()){
-			wo.getHitbox().getBounds().intersects(getBottomBound());
+			if(wo.getHitbox().getBounds().intersects(getBottomBound())){
+				velocity.setY(0);
+			}
 		}
 
 	}
@@ -90,13 +92,14 @@ public class Player extends GameObject implements Anchor, Renderable {
 		}
 	}
 
-	public void handleUpgrade(Upgrade touched) throws Exception {
+	public Upgrade handleUpgrade(Upgrade touched){
+		Upgrade dropped = null;
 		if (touched.type() == 'R') {
-			rw.getUpgrade(touched);
+			return rw.getUpgrade(touched);
 		} 
 		
 		else if (touched.type() == 'M') {
-			mw.getUpgrade(touched);
+			return mw.getUpgrade(touched);
 		} 
 		
 		else if (touched.type() == 'P') {
@@ -110,16 +113,16 @@ public class Player extends GameObject implements Anchor, Renderable {
 				getSpUp();
 			}
 		} 
-		else {
-			throw new Exception();
-		}
+		return null;
 	}
 
-	public void getUseable(Useable u) {
+	public Useable getUseable(Useable u) {
+		Useable temp = null;
 		if (use != null) {
-			Useable temp = use;
+			temp = use;
 		}
 		use = u;
+		return temp;
 	}
 
 	@Override

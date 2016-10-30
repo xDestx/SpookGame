@@ -18,9 +18,10 @@ public class MeleeWeapon extends GameObject {
 		
 
 	}
-	public void getUpgrade(Upgrade newUp){
+	public Upgrade getUpgrade(Upgrade newUp){
+		Upgrade temp = null;
 		if(upgrades[1] != null){
-			Upgrade temp = upgrades[1];
+			temp = upgrades[1];
 			upgrades[1] = upgrades[0];
 			upgrades[0] = newUp;
 		}
@@ -28,6 +29,7 @@ public class MeleeWeapon extends GameObject {
 			upgrades[1] = upgrades[0];
 			upgrades[0] = newUp;
 		}
+		return temp;
 	}
 	public int getDmg(){
 		return dmg;

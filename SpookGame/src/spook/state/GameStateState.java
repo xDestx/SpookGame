@@ -163,4 +163,8 @@ public class GameStateState extends GameState {
 		return currentWorld;
 	}
 
+	public Player getPlayer() {
+		return player;
+	}
+
 }
