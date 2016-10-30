@@ -13,6 +13,7 @@ import spook.items.Useable;
 import spook.state.GameStateState;
 import spook.util.Anchor;
 import spook.util.Hitbox;
+import spook.util.ImageLoader;
 import spook.util.Location;
 import spook.util.Velocity;
 import spook.world.WorldObject;
@@ -201,7 +202,8 @@ public class Player extends GameObject implements Anchor, Renderable {
 	public void render(Graphics g, int xoff, int yoff) {
 		Color last = g.getColor();
 		g.setColor(Color.WHITE);
-		g.fillRect(xoff, yoff, (int)hitbox.getBounds().getWidth(),(int) hitbox.getBounds().getHeight());
+		g.drawImage(ImageLoader.getImage("char.png"), xoff, yoff, (int)hitbox.getBounds().getWidth(),(int) hitbox.getBounds().getHeight(), null);
+		//	g.fillRect(xoff, yoff, (int)hitbox.getBounds().getWidth(),(int) hitbox.getBounds().getHeight());
 		
 	//	drawHitBoxes(g,xoff,yoff);
 	}
