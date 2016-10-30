@@ -2,7 +2,7 @@ package spook.util;
 
 import java.awt.Rectangle;
 
-import spook.World;
+import spook.world.World;
 
 public class Hitbox {
 
