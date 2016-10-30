@@ -3,6 +3,7 @@ package spook.state;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,9 +13,11 @@ import javax.swing.JOptionPane;
 import spook.Camera;
 import spook.Game;
 import spook.GameObject;
+import spook.entities.Enemy;
 import spook.entities.Player;
 import spook.graphic.Renderable;
 import spook.util.Anchor;
+import spook.util.Hitbox;
 import spook.util.Location;
 import spook.world.World;
 import spook.world.WorldObject;
@@ -26,6 +29,7 @@ public class GameStateState extends GameState {
 	private Camera camera;
 	private World currentWorld;
 	private Player player;
+	private ArrayList<Enemy> enemies;
 	
 	public GameStateState(Game g)
 	{
@@ -35,6 +39,12 @@ public class GameStateState extends GameState {
 		currentWorld = World.getWorld(0);
 		camera = new Camera(new Location(0,0,currentWorld), Game.WIDTH, Game.HEIGHT);
 		player = new Player("Freddy",new Location(0,-50,currentWorld));
+		enemies.add(new Enemy(100, false, new Hitbox(100, 100, 500, -20, currentWorld)));
+		enemies.add(new Enemy(100, false, new Hitbox(100, 100, 1000, -20, currentWorld)));
+		enemies.add(new Enemy(100, false, new Hitbox(100, 100, 1500, -20, currentWorld)));
+		enemies.add(new Enemy(100, false, new Hitbox(100, 100, 2000, -20, currentWorld)));
+		enemies.add(new Enemy(100, false, new Hitbox(100, 100, 2500, -20, currentWorld)));
+		enemies.add(new Enemy(1000, true, new Hitbox(100, 100, 3000, -20, currentWorld)));
 		addObject(player);
 		camera.setAnchor((Anchor)player);
 	}
