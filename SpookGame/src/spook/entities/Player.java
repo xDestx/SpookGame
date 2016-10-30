@@ -148,6 +148,13 @@ public class Player extends GameObject implements Anchor, Renderable {
 		}
 	}
 	
+	public void getDmgUp() {
+			dmgMod = (int)(dmgMod * 1.25);
+	}
+	public void getFireSpeedUp() {
+			shootSpeed = (int)(shootSpeed * 1.25);
+	}
+	
 	public void jump()
 	{
 		if(!canJump)
@@ -157,35 +164,24 @@ public class Player extends GameObject implements Anchor, Renderable {
 		canJump = false;
 	}
 
-	public void handleUpgrade(Upgrade touched) throws Exception {
-		if (touched.type() == 'R') {
-			rw.getUpgrade(touched);
-		} 
-		
-		else if (touched.type() == 'M') {
-			mw.getUpgrade(touched);
-		} 
-		
-		else if (touched.type() == 'P') {
-			if(touched.subtype() == 'H'){
-				getHpUp();
-			}
-			else if(touched.subtype() == 'J'){
-				getJumpUp();
-			}
-			else{
-				getSpUp();
-			}
-		} 
-		else {
-			throw new Exception();
+	public void handleUpgrade(Upgrade touched){
+		if(touched.type() == 'H'){
+			getHpUp();
 		}
-	}
+		else if(touched.type() == 'J'){
+			getJumpUp();
+		}
+		else if(touched.type() == 'S'){
+			getSpUp();
+		}
+		else if(touched.type() == 'D'){
+			getDmgUp();
+		}
+		else if(touched.type() == 'F'){
+			getFireSpeedUp();
+		}
 
 	public void getUseable(Useable u) {
-		if (use != null) {
-			Useable temp = use;
-		}
 		use = u;
 	}
 
