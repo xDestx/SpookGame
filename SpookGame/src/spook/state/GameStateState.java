@@ -10,9 +10,9 @@ import java.util.List;
 import spook.Camera;
 import spook.Game;
 import spook.GameObject;
-import spook.World;
 import spook.graphic.Renderable;
 import spook.util.Location;
+import spook.world.World;
 
 public class GameStateState extends GameState {
 

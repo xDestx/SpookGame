@@ -1,6 +1,6 @@
 package spook.util;
 
-import spook.World;
+import spook.world.World;
 
 public class Location implements Anchor {
 
