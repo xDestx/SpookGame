@@ -1,9 +1,10 @@
 package spook.weapons;
 
+import spook.GameObject;
 import spook.items.Upgrade;
 import spook.state.GameStateState;
 
-public class MeleeWeapon extends Weapon {
+public class MeleeWeapon extends GameObject {
 	private int dmg, range;
 	private String name;
 	private Upgrade[] upgrades;
