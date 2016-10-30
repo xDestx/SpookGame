@@ -1,5 +1,6 @@
 package spook;
 
+import spook.state.GameStateState;
 import spook.util.Anchor;
 import spook.util.Hitbox;
 import spook.util.Location;
@@ -33,9 +34,9 @@ public class Camera extends GameObject {
 	{
 		a = null;
 	}
-	
+
 	@Override
-	public void tick() {
+	public void tick(GameStateState s) {
 		if(a==null)
 			return;
 		box.setX(a.getLocation().getX());
