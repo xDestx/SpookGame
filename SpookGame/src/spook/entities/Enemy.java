@@ -1,21 +1,27 @@
 package spook.entities;
 
+import java.awt.Graphics;
+
 import spook.GameObject;
+import spook.graphic.Renderable;
 import spook.items.Upgrade;
 import spook.items.Useable;
 import spook.state.GameStateState;
 import spook.util.Hitbox;
-import spook.util.Velocity;
+import spook.util.ImageLoader;
 
-public class Enemy extends GameObject {
+public class Enemy extends GameObject implements Renderable {
 	private double hp, maxHp;
 	private boolean isBoss;
 	private Hitbox hit;
+	private int costick;
+	
 	public Enemy(double mH, boolean b, Hitbox h){
 		maxHp = mH;
 		hp = maxHp;
 		isBoss = b;
 		hit = h;
+		costick = 0;
 	}
 	public void takeDmg(double dmg) {
 		hp-=dmg;
@@ -47,8 +53,17 @@ public class Enemy extends GameObject {
 			}
 			gs.removeGameObject(this);
 		}
+		double xm = gs.getPlayer().getHitbox().getLocation().getX() - this.getHitbox().getLocation().getX();
+		double xy = gs.getPlayer().getHitbox().getLocation().getY() - this.getHitbox().getLocation().getY();
+		xm = (xm < 0) ? -1:1;
+		xy = (xy < 0) ? -1:1;
+		this.getHitbox().addX(0.8 * xm);
+		this.getHitbox().addY(0.8 * xy);
+		this.getHitbox().addY(Math.cos(Math.toRadians(costick)));
 		
-		
+		costick++;
+		if(costick > 360)
+			costick = 0;
 
 	}
 	public double getCurrentHp(){
@@ -59,5 +74,9 @@ public class Enemy extends GameObject {
 	}
 	public Hitbox getHitbox(){
 		return hit;
+	}
+	@Override
+	public void render(Graphics g, int xoff, int yoff) {
+		g.drawImage(ImageLoader.getImage("ghost.png"), xoff, yoff, 70,70, null);
 	}
 }
