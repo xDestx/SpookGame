@@ -133,7 +133,19 @@ public class Game {
 				
 			}
 		});
-		UIButton b1 = new UIButton("HELP",new UIAction());
+		UIButton b1 = new UIButton("HELP",new UIAction() {
+			@Override
+			public void act(GameState a)
+			{
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run()
+					{
+						//Display help
+					}
+				});
+			}
+		});
 		UIButton b2 = new UIButton("QUIT",new UIAction() {
 			@Override
 			public void act(GameState a)

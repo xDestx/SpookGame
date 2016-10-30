@@ -2,6 +2,8 @@ package spook.entities;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 import spook.Game;
 import spook.GameObject;
@@ -123,6 +125,7 @@ public class Player extends GameObject implements Anchor, Renderable {
 		Color last = g.getColor();
 		g.setColor(Color.WHITE);
 		g.fillRect(xoff, yoff, (int)hitbox.getBounds().getWidth(),(int) hitbox.getBounds().getHeight());
+	//	drawHitBoxes(g,xoff,yoff);
 	}
 
 	@Override
@@ -134,6 +137,35 @@ public class Player extends GameObject implements Anchor, Renderable {
 	@Override
 	public Location getLocation() {
 		return hitbox.getLocation();
+	}
+	
+	public Rectangle getLeftBound() {
+		return new Rectangle((int)hitbox.getLocation().getX(), (int)hitbox.getLocation().getY()+5, 10, (int)this.hitbox.getBounds().getHeight()-10);
+	}
+	
+	public Rectangle getRightBound() {
+		return new Rectangle((int)hitbox.getLocation().getX() + (int)(hitbox.getBounds().getWidth()-10), (int)hitbox.getLocation().getY()+5, 10, (int)this.hitbox.getBounds().getHeight()-10);
+	}
+	
+	public Rectangle getTopBound() {
+		return new Rectangle((int)hitbox.getLocation().getX()+5, (int)hitbox.getLocation().getY(), (int)(this.hitbox.getBounds().getWidth()-10), 10);
+	}
+	
+	public Rectangle getBottomBound() {
+		return new Rectangle((int)hitbox.getLocation().getX()+5, (int)hitbox.getLocation().getY()+(int)(hitbox.getBounds().getHeight()-10), (int)(this.hitbox.getBounds().getWidth()-10), 10);
+	}
+	
+	public void drawHitBoxes(Graphics g, int x, int y)
+	{
+		g.setColor(Color.ORANGE);
+		Graphics2D g2 = (Graphics2D)g;
+		g2.draw(getLeftBound());
+		g2.setColor(Color.RED);
+		g2.draw(getRightBound());
+		g2.setColor(Color.PINK);
+		g2.draw(getTopBound());
+		g2.setColor(Color.BLUE);
+		g2.draw(getBottomBound());
 	}
 	
 	
