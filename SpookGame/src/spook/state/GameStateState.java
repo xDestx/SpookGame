@@ -171,5 +171,12 @@ public class GameStateState extends GameState {
 		// TODO Auto-generated method stub
 		
 	}
+	public World getCurrentWorld(){
+		return currentWorld;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
 
 }

@@ -82,7 +82,12 @@ public class Player extends GameObject implements Anchor, Renderable {
 		if (hp <= 0.0) {
 			gs.gameOver();
 		}
-		//velocity.addY((double)Game.GRAVITY/(double)Game.TPS);
+		for(WorldObject wo: gs.getCurrentWorld().getWorldObjects()){
+			if(wo.getHitbox().getBounds().intersects(getBottomBound())){
+				velocity.setY(0);
+			}
+		}
+		velocity.addY((double)Game.GRAVITY/(double)Game.TPS);
 		hitbox.addY(velocity.getY()/(double)Game.TPS);
 		hitbox.addX(velocity.getX()/(double)Game.TPS);
 		double xchange = 0;
