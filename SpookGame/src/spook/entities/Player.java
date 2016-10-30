@@ -133,7 +133,7 @@ public class Player extends GameObject implements Anchor, Renderable {
 		if(hitbox.getLocation().getY() > 5000)
 			this.takeDmg(this.maxHp);
 		if(attacking){
-			Hitbox newHit = new Hitbox(150, 150, new Location(this.getHitbox().getLocation().getX()-75, this.getHitbox().getLocation().getY()-75,this.getHitbox().getLocation().getWorld()));
+			Hitbox newHit = new Hitbox(300, 300, new Location(this.getHitbox().getLocation().getX()-75, this.getHitbox().getLocation().getY()-75,this.getHitbox().getLocation().getWorld()));
 			for(GameObject go: gs.getGameObjects()){
 				if(go instanceof Enemy && newHit.getBounds().intersects(((Enemy) go).getHitbox().getBounds())){
 					((Enemy) go).takeDmg(dmgMod);
