@@ -20,6 +20,10 @@ import spook.world.WorldObject;
 =======
 import spook.weapons.MeleeWeapon;
 import spook.weapons.RangedWeapon;
+<<<<<<< HEAD
+>>>>>>> refs/remotes/origin/master
+=======
+import spook.world.WorldObject;
 >>>>>>> refs/remotes/origin/master
 
 public class Player extends GameObject implements Anchor, Renderable {
@@ -30,9 +34,16 @@ public class Player extends GameObject implements Anchor, Renderable {
 	private Velocity velocity;
 	private int hpUpgrades, speedUpgrades, jumpUpgrades, shootSpeed;
 	private Useable use;
+<<<<<<< HEAD
+=======
+	private MeleeWeapon mw;
+	private RangedWeapon rw;
+	private boolean canJump;
+>>>>>>> refs/remotes/origin/master
 
 	public Player(String n, Location l) {
 		name = n;
+		canJump = true;
 		hpUpgrades = 0;
 		speedUpgrades = 0;
 		jumpUpgrades = 0;
@@ -45,8 +56,20 @@ public class Player extends GameObject implements Anchor, Renderable {
 		velocity = new Velocity(0,0);
 		hitbox = new Hitbox(70, 70, l);
 		use = null;
+<<<<<<< HEAD
 		shootSpeed = 20;
 		dmgMod = 20;
+=======
+	}
+	
+	public boolean canJump()
+	{
+		return canJump;
+	}
+	
+	public void setCanJump(boolean jump) {
+		this.canJump=jump;
+>>>>>>> refs/remotes/origin/master
 	}
 
 	public void setRightHeld(boolean r)
@@ -89,6 +112,8 @@ public class Player extends GameObject implements Anchor, Renderable {
 		for(WorldObject wo: gs.getCurrentWorld().getWorldObjects()){
 			if(wo.getHitbox().getBounds().intersects(getBottomBound())){
 				velocity.setY(0);
+				hitbox.setY(wo.getHitbox().getLocation().getY()-hitbox.getBounds().getHeight());
+				setCanJump(true);
 			}
 		}
 		velocity.addY((double)Game.GRAVITY/(double)Game.TPS);
@@ -135,7 +160,11 @@ public class Player extends GameObject implements Anchor, Renderable {
 	
 	public void jump()
 	{
-		velocity.setY(-jumpHeight*10);
+		if(!canJump)
+			return;
+		velocity.setY(-jumpHeight*1000);
+		hitbox.addY(-5);
+		canJump = false;
 	}
 
 	public void handleUpgrade(Upgrade touched) throws Exception {
