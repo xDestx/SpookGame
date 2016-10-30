@@ -16,8 +16,7 @@ import spook.util.Hitbox;
 import spook.util.Location;
 import spook.util.Velocity;
 import spook.world.WorldObject;
-import spook.weapons.MeleeWeapon;
-import spook.weapons.RangedWeapon;
+
 
 public class Player extends GameObject implements Anchor, Renderable {
 	private double hp, maxHp, jumpHeight, speed, dmgMod;
@@ -122,54 +121,23 @@ public class Player extends GameObject implements Anchor, Renderable {
 			jumpHeight *= 1.25;
 		}
 	}
-<<<<<<< HEAD
+
 	public void getDmgUp() {
 			dmgMod = (int)(dmgMod * 1.25);
 	}
 	public void getFireSpeedUp() {
 			shootSpeed = (int)(shootSpeed * 1.25);
-=======
-	
+	}
 	public void jump()
 	{
 		velocity.setY(-jumpHeight*10);
 	}
 
-	public void handleUpgrade(Upgrade touched) throws Exception {
-		if (touched.type() == 'R') {
-			rw.getUpgrade(touched);
-		} 
-		
-		else if (touched.type() == 'M') {
-			mw.getUpgrade(touched);
-		} 
-		
-		else if (touched.type() == 'P') {
-			if(touched.subtype() == 'H'){
-				getHpUp();
-			}
-			else if(touched.subtype() == 'J'){
-				getJumpUp();
-			}
-			else{
-				getSpUp();
-			}
-		} 
-		else {
-			throw new Exception();
-		}
->>>>>>> refs/remotes/origin/master
-	}
 
-<<<<<<< HEAD
+
 	public void handleUpgrade(Upgrade touched){
 		if(touched.type() == 'H'){
 			getHpUp();
-=======
-	public void getUseable(Useable u) {
-		if (use != null) {
-			Useable temp = use;
->>>>>>> refs/remotes/origin/master
 		}
 		else if(touched.type() == 'J'){
 			getJumpUp();
