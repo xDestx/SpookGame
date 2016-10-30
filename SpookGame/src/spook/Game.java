@@ -10,11 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import spook.state.GameState;
+import spook.state.GameStateState;
 import spook.state.MainMenuState;
 import spook.ui.UIAction;
 import spook.ui.UIButton;
+import spook.world.World;
 
 public class Game {
 
@@ -101,6 +104,7 @@ public class Game {
 	{
 		BufferStrategy bs = c.getBufferStrategy();
 		Graphics g = bs.getDrawGraphics();
+		g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 		states.get(currentState).render(g);
 		g.dispose();
 		bs.show();
@@ -113,11 +117,31 @@ public class Game {
 	
 	private void init()
 	{
-		UIButton b = new UIButton("START",new UIAction());
+		World.init();
+		UIButton b = new UIButton("START",new UIAction() {
+			@Override
+			public void act(GameState a)
+			{
+				SwingUtilities.invokeLater(new Runnable() { 
+					@Override
+					public void run()
+					{
+						a.getGame().setGameState(new GameStateState(a.getGame()));
+					}
+				});
+				
+			}
+		});
 		UIButton b1 = new UIButton("HELP",new UIAction());
-		UIButton b2 = new UIButton("QUIT",new UIAction());
+		UIButton b2 = new UIButton("QUIT",new UIAction() {
+			@Override
+			public void act(GameState a)
+			{
+				System.exit(0);
+			}
+		});
 		UIButton[] list = new UIButton[] {b, b1,b2};
-		MainMenuState mms = new MainMenuState(list);
+		MainMenuState mms = new MainMenuState(list, this);
 		this.addState(mms);
 		this.setGameState(mms);
 		frame.setVisible(true);

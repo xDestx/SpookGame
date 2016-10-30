@@ -17,8 +17,9 @@ public class MainMenuState extends GameState {
 	private UIButton[] buttons;
 	private int hovered;
 	
-	public MainMenuState(final UIButton[] buttons)
+	public MainMenuState(final UIButton[] buttons, Game g)
 	{
+		super(g);
 		this.buttons = buttons;
 		hovered = -1;
 	}
