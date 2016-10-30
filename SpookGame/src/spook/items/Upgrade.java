@@ -1,6 +1,7 @@
 package spook.items;
 
 import spook.GameObject;
+import spook.state.GameStateState;
 
 public class Upgrade extends GameObject {
 	private char type;
@@ -8,8 +9,7 @@ public class Upgrade extends GameObject {
 		//M for melee, R for ranged
 		type = t;
 	}
-	@Override
-	public void tick() {
+	public void tick(GameStateState gs) {
 		
 
 	}

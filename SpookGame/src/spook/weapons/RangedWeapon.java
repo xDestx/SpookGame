@@ -1,6 +1,7 @@
 package spook.weapons;
 
 import spook.items.Upgrade;
+import spook.state.GameStateState;
 
 public class RangedWeapon extends Weapon {
 	private int dmg;
@@ -11,7 +12,7 @@ public class RangedWeapon extends Weapon {
 		dmg = d;
 		upgrades = new Upgrade[2];
 	}
-	public void tick() {
+	public void tick(GameStateState gs) {
 		
 
 	}
