@@ -39,12 +39,17 @@ public class GameStateState extends GameState {
 		currentWorld = World.getWorld(0);
 		camera = new Camera(new Location(0,0,currentWorld), Game.WIDTH, Game.HEIGHT);
 		player = new Player("Freddy",new Location(0,-50,currentWorld));
+		enemies = new ArrayList<Enemy>();
 		enemies.add(new Enemy(100, false, new Hitbox(100, 100, 500, -20, currentWorld)));
 		enemies.add(new Enemy(100, false, new Hitbox(100, 100, 1000, -20, currentWorld)));
 		enemies.add(new Enemy(100, false, new Hitbox(100, 100, 1500, -20, currentWorld)));
 		enemies.add(new Enemy(100, false, new Hitbox(100, 100, 2000, -20, currentWorld)));
 		enemies.add(new Enemy(100, false, new Hitbox(100, 100, 2500, -20, currentWorld)));
 		enemies.add(new Enemy(1000, true, new Hitbox(100, 100, 3000, -20, currentWorld)));
+		for(Enemy e : enemies)
+		{
+			this.addObject(e);
+		}
 		addObject(player);
 		camera.setAnchor((Anchor)player);
 	}
