@@ -39,8 +39,8 @@ public class Camera extends GameObject {
 	public void tick(GameStateState s) {
 		if(a==null)
 			return;
-		box.setX(a.getLocation().getX());
-		box.setY(a.getLocation().getY());
+		box.setX(a.getLocation().getX() - (int)((double)Game.WIDTH/2.0));
+		box.setY(a.getLocation().getY() - (int)((double)Game.HEIGHT/2.0));
 	}
 	
 }
