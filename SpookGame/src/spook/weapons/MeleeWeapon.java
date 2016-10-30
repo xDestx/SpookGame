@@ -27,4 +27,7 @@ public class MeleeWeapon extends Weapon {
 			upgrades[0] = newUp;
 		}
 	}
+	public int getDmg(){
+		return dmg;
+	}
 }
