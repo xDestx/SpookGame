@@ -1,12 +1,17 @@
 package spook.entities;
 
 import spook.GameObject;
+import spook.items.Upgrade;
 import spook.state.GameStateState;
+import spook.weapons.MeleeWeapon;
+import spook.weapons.RangedWeapon;
 
 public class Character extends GameObject {
 	private double hp, maxHp, jumpHeight, speed;
 	private String name;
 	private int hpUpgrades, speedUpgrades, jumpUpgrades;
+	private MeleeWeapon mw;
+	private RangedWeapon rw;
 	public Character(String n){
 		name = n;
 		hpUpgrades = 0;
@@ -55,8 +60,19 @@ public class Character extends GameObject {
 		}
 	}
 	
-	public void handleUpgrade(Upgrade touched){
+	public void handleUpgrade(Upgrade touched) throws Exception{
+		if(touched.type() == 'R'){
 		
+		}
+		else if(touched.type() == 'M'){
+			
+		}
+		else if(touched.type() == 'P'){
+		
+		}
+		else{
+			throw new Exception();
+		}
 	}
 
 }
