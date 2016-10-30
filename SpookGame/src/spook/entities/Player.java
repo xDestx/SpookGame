@@ -15,8 +15,6 @@ import spook.util.Anchor;
 import spook.util.Hitbox;
 import spook.util.Location;
 import spook.util.Velocity;
-import spook.weapons.MeleeWeapon;
-import spook.weapons.RangedWeapon;
 import spook.world.WorldObject;
 
 public class Player extends GameObject implements Anchor, Renderable {
@@ -27,8 +25,6 @@ public class Player extends GameObject implements Anchor, Renderable {
 	private Velocity velocity;
 	private int hpUpgrades, speedUpgrades, jumpUpgrades;
 	private Useable use;
-	private MeleeWeapon mw;
-	private RangedWeapon rw;
 	private boolean canJump;
 
 	public Player(String n, Location l) {
@@ -93,9 +89,6 @@ public class Player extends GameObject implements Anchor, Renderable {
 	public void tick(GameStateState gs) {
 		if (hp <= 0.0) {
 			gs.gameOver();
-		}
-		for(WorldObject wo: gs.getCurrentWorld().getWorldObjects()){
-			
 		}
 		velocity.addY((double)Game.GRAVITY/(double)Game.TPS);
 		hitbox.addY(velocity.getY()/(double)Game.TPS);

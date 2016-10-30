@@ -5,6 +5,7 @@ import spook.items.Upgrade;
 import spook.items.Useable;
 import spook.state.GameStateState;
 import spook.util.Hitbox;
+import spook.util.Location;
 
 public class UseableEntity extends GameObject {
 	private Useable use;

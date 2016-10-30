@@ -6,11 +6,9 @@ import spook.state.GameStateState;
 
 public class Useable extends GameObject {
 	private char type;
-	private int duration;
 
-	public Useable(char t, int sec){
+	public Useable(char t){
 		type = t;
-		duration = Game.TPS * sec;
 	}
 	public void tick(GameStateState gs) {
 		
@@ -19,8 +17,6 @@ public class Useable extends GameObject {
 	public char getType(){
 		return type;
 	}
-	public int getDur(){
-		return duration;
-	}
+
 
 }
