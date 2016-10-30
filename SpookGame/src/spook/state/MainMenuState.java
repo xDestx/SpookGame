@@ -8,13 +8,16 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.font.TextLayout;
+import java.awt.image.BufferedImage;
 
 import spook.Game;
 import spook.ui.UIButton;
+import spook.util.ImageLoader;
 
 public class MainMenuState extends GameState {
 
 	private UIButton[] buttons;
+	private BufferedImage bg;
 	private int hovered;
 	
 	public MainMenuState(final UIButton[] buttons, Game g)
@@ -22,6 +25,7 @@ public class MainMenuState extends GameState {
 		super(g);
 		this.buttons = buttons;
 		hovered = -1;
+		bg = ImageLoader.loadImage("gamebg.png");
 	}
 	
 	@Override
@@ -32,6 +36,8 @@ public class MainMenuState extends GameState {
 		int yoff = 0;
 		int ybase = (int)(Game.HEIGHT*0.3);
 		Color last = g.getColor();
+		//Draw bg
+		g.drawImage(bg, 0, 0, bg.getWidth(), bg.getHeight(), null);
 		for(int i = 0; i<buttons.length;i++)
 		{
 			yoff = ybase + (i * ydiv) + (10*i);

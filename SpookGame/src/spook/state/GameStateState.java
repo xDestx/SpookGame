@@ -7,6 +7,8 @@ import java.util.ConcurrentModificationException;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import spook.Camera;
 import spook.Game;
 import spook.GameObject;
@@ -176,8 +178,8 @@ public class GameStateState extends GameState {
 	}
 	
 	public void gameOver() {
-		// TODO Auto-generated method stub
-		
+		JOptionPane.showMessageDialog(null, "Sorry, you have died");
+		this.getGame().setGameState(0);
 	}
 	public World getCurrentWorld(){
 		return currentWorld;

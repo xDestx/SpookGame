@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import spook.state.GameState;
@@ -50,6 +51,11 @@ public class Game {
 	public GameState getGameState(int index)
 	{
 		return this.states.get(index);
+	}
+	
+	public void setGameState(int index)
+	{
+		this.currentState = index;
 	}
 	
 	public void setGameState(GameState s)
@@ -143,6 +149,7 @@ public class Game {
 					public void run()
 					{
 						//Display help
+						JOptionPane.showMessageDialog(null, "Use ASDW to move\nUse Space to attack (melee)");
 					}
 				});
 			}
