@@ -10,25 +10,28 @@ import java.util.List;
 import spook.Camera;
 import spook.Game;
 import spook.GameObject;
+import spook.entities.Player;
 import spook.graphic.Renderable;
 import spook.util.Location;
 import spook.world.World;
+import spook.world.WorldObject;
 
 public class GameStateState extends GameState {
 
-	private Game g;
 	private List<GameObject>go;
 	private List<Renderable>re;
 	private Camera camera;
 	private World currentWorld;
+	private Player player;
 	
 	public GameStateState(Game g)
 	{
-		this.g = g;
+		super(g);
 		go = new LinkedList<GameObject>();
 		re = new LinkedList<Renderable>();
 		currentWorld = World.getWorld(0);
 		camera = new Camera(new Location(0,0,currentWorld), Game.WIDTH, Game.HEIGHT);
+		player = new Player("Freddy",new Location(0,0,currentWorld));
 	}
 	
 	public void addObject(GameObject o)
@@ -64,12 +67,23 @@ public class GameStateState extends GameState {
 	
 	public void removeGameObject(int index)
 	{
-		go.remove(index);
+		GameObject a = go.remove(index);
+		if (a instanceof Renderable)
+			removeRenderable((Renderable)a);
 	}
 	
 	@Override
 	public void render(Graphics g) {
 		try {
+			for (WorldObject wo : currentWorld.getWorldObjects())
+			{
+				if(camera.intersects(wo.getHitbox()))
+				{
+					int xoff = (int)(wo.getHitbox().getBounds().getX() - camera.getHitbox().getBounds().getX());
+					int yoff = (int)(wo.getHitbox().getBounds().getY() - camera.getHitbox().getBounds().getY());
+					wo.render(g, xoff, yoff);
+				}
+			}
 			for (Renderable r : re)
 			{
 				if(camera.intersects(r.getHitbox()))

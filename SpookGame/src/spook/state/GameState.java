@@ -4,12 +4,20 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+import spook.Game;
+
 public abstract class GameState {
 
+	private Game g;
 	
-	public GameState()
+	public GameState(Game g)
 	{
-		
+		this.g= g;
+	}
+	
+	public Game getGame()
+	{
+		return this.g;
 	}
 	
 	public abstract void render(Graphics g);
