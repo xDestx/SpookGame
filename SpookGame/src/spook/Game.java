@@ -2,8 +2,10 @@ package spook;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import javax.swing.JFrame;
 
 import spook.state.GameState;
 import spook.state.MainMenuState;
+import spook.ui.UIAction;
 import spook.ui.UIButton;
 
 public class Game {
@@ -98,10 +101,9 @@ public class Game {
 	{
 		BufferStrategy bs = c.getBufferStrategy();
 		Graphics g = bs.getDrawGraphics();
-		BufferedImage bi = new BufferedImage(Game.WIDTH, Game.HEIGHT, BufferedImage.TYPE_3BYTE_BGR);
-		states.get(currentState).render(bi.getGraphics());
-		g.drawImage(bi, 0, 0, null);
+		states.get(currentState).render(g);
 		g.dispose();
+		bs.show();
 	}
 	
 	private void tick()
@@ -111,13 +113,17 @@ public class Game {
 	
 	private void init()
 	{
-		UIButton b = new UIButton("memes",null);
-		UIButton b1 = new UIButton("2222",null);
-		UIButton[] list = new UIButton[] { b, b1};
+		UIButton b = new UIButton("START",new UIAction());
+		UIButton b1 = new UIButton("HELP",new UIAction());
+		UIButton b2 = new UIButton("QUIT",new UIAction());
+		UIButton[] list = new UIButton[] {b, b1,b2};
 		MainMenuState mms = new MainMenuState(list);
 		this.addState(mms);
 		this.setGameState(mms);
 		frame.setVisible(true);
+		MouseWatcher mw = new MouseWatcher(this);
+		c.addMouseListener(mw);
+		c.addMouseMotionListener(mw);
 		if(c.getBufferStrategy() == null)
 		{
 			c.createBufferStrategy(2);
@@ -125,7 +131,32 @@ public class Game {
 	}
 	
 	
+	public void mouseMoved(MouseEvent e)
+	{
+		states.get(currentState).mouseMoved(e);
+	}
 	
+	public void mouseClicked(MouseEvent e)
+	{
+		states.get(currentState).mouseClicked(e);
+	}
+	
+	public void mouseDragged(MouseEvent e)
+	{
+		states.get(currentState).mouseDragged(e);
+	}
+	
+	public void keyPressed(KeyEvent e) {
+		states.get(currentState).keyPressed(e);
+	}
+
+	public void keyReleased(KeyEvent e) {
+		states.get(currentState).keyReleased(e);
+	}
+
+	public void mouseReleased(MouseEvent e) {
+		states.get(currentState).mouseReleased(e);
+	}
 	
 	public static final int TPS = 100;
 	
@@ -134,5 +165,40 @@ public class Game {
 		Game game = new Game();
 		
 		game.start();
+	}
+	
+	
+	class MouseWatcher extends MouseAdapter {
+		
+		private Game g;
+		
+		public MouseWatcher(Game g)
+		{
+			this.g = g;
+		}
+		
+		@Override
+		public void mouseMoved(MouseEvent e)
+		{
+			g.mouseMoved(e);
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e)
+		{
+			g.mouseClicked(e);
+		}
+		
+		@Override
+		public void mouseDragged(MouseEvent e)
+		{
+			g.mouseDragged(e);
+		}
+		
+		@Override
+		public void mouseReleased(MouseEvent e)
+		{
+			g.mouseReleased(e);
+		}
 	}
 }
