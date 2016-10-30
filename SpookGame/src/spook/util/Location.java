@@ -50,6 +50,10 @@ public class Location implements Anchor {
 		return this;
 	}
 
+	public World getWorld() {
+		return w;
+	}
+
 	
 	
 	

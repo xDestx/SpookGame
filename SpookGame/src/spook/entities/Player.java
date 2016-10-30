@@ -50,6 +50,10 @@ public class Player extends GameObject implements Anchor, Renderable {
 	{
 		return canJump;
 	}
+	public void attack(){
+		Hitbox newHit = new Hitbox(150, 150, new Location(this.getHitbox().getLocation().getX()-75, this.getHitbox().getLocation().getY()-75,this.getHitbox().getLocation().getWorld()));
+		
+	}
 	
 	public void setCanJump(boolean jump) {
 		this.canJump=jump;
