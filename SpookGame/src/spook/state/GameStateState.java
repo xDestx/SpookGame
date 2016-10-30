@@ -10,6 +10,7 @@ import java.util.List;
 import spook.Camera;
 import spook.Game;
 import spook.GameObject;
+import spook.entities.Player;
 import spook.graphic.Renderable;
 import spook.util.Location;
 import spook.world.World;
@@ -21,6 +22,7 @@ public class GameStateState extends GameState {
 	private List<Renderable>re;
 	private Camera camera;
 	private World currentWorld;
+	private Player player;
 	
 	public GameStateState(Game g)
 	{
@@ -29,6 +31,7 @@ public class GameStateState extends GameState {
 		re = new LinkedList<Renderable>();
 		currentWorld = World.getWorld(0);
 		camera = new Camera(new Location(0,0,currentWorld), Game.WIDTH, Game.HEIGHT);
+		player = new Player("Freddy",new Location(0,0,currentWorld));
 	}
 	
 	public void addObject(GameObject o)

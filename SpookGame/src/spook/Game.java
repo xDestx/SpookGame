@@ -26,6 +26,7 @@ public class Game {
 	private JFrame frame;
 	private List<GameState>states;
 	private int currentState;
+	public static final int GRAVITY = 7;
 	public static final int WIDTH = 16*80, HEIGHT = 9*80;
 	
 	public Game()
