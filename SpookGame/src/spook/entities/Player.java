@@ -21,6 +21,7 @@ import spook.weapons.RangedWeapon;
 public class Player extends GameObject implements Anchor, Renderable {
 	private double hp, maxHp, jumpHeight, speed;
 	private String name;
+	private boolean rightHeld, leftHeld;
 	private Hitbox hitbox;
 	private Velocity velocity;
 	private int hpUpgrades, speedUpgrades, jumpUpgrades;
@@ -35,13 +36,35 @@ public class Player extends GameObject implements Anchor, Renderable {
 		jumpUpgrades = 0;
 		hp = 100.0;
 		maxHp = 100.0;
-		speed = 10;
-		jumpHeight = 200;
+		speed = 170;
+		jumpHeight = 1;
+		rightHeld = false;
+		leftHeld = false;
 		velocity = new Velocity(0,0);
 		hitbox = new Hitbox(70, 70, l);
 		use = null;
 	}
 
+	public void setRightHeld(boolean r)
+	{
+		this.rightHeld = r;
+	}
+	
+	public void setLeftHeld(boolean r)
+	{
+		this.leftHeld = r;
+	}
+	
+	public boolean getRightHeld()
+	{
+		return this.rightHeld;
+	}
+	
+	public boolean getLeftHeld()
+	{
+		return this.leftHeld;
+	}
+	
 	public void takeDmg(double dmg) {
 		hp -= dmg;
 	}
@@ -59,10 +82,16 @@ public class Player extends GameObject implements Anchor, Renderable {
 		if (hp <= 0.0) {
 			gs.gameOver();
 		}
-		velocity.addY((double)Game.GRAVITY/(double)Game.TPS);
-		hitbox.addY(velocity.getY());
-		hitbox.addX(velocity.getX());
-
+		//velocity.addY((double)Game.GRAVITY/(double)Game.TPS);
+		hitbox.addY(velocity.getY()/(double)Game.TPS);
+		hitbox.addX(velocity.getX()/(double)Game.TPS);
+		double xchange = 0;
+		if(getLeftHeld())
+			xchange=-speed;
+		if(getRightHeld())
+			xchange=speed;
+		hitbox.addX(xchange/(double)Game.TPS);
+		
 	}
 
 	public void getHpUp() {
@@ -86,6 +115,11 @@ public class Player extends GameObject implements Anchor, Renderable {
 			jumpUpgrades++;
 			jumpHeight *= 1.25;
 		}
+	}
+	
+	public void jump()
+	{
+		velocity.setY(-jumpHeight*10);
 	}
 
 	public void handleUpgrade(Upgrade touched) throws Exception {
