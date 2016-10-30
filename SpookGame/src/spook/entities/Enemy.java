@@ -5,9 +5,11 @@ import spook.state.GameStateState;
 
 public class Enemy extends GameObject {
 	private double hp, maxHp;
-	public Enemy(double mH){
+	private boolean isBoss;
+	public Enemy(double mH, boolean b){
 		maxHp = mH;
 		hp = maxHp;
+		isBoss = b;
 	}
 	public void takeDmg(double dmg) {
 		hp-=dmg;
@@ -25,5 +27,12 @@ public class Enemy extends GameObject {
 	public double getMaxHp(){
 		return maxHp;
 	}
-
+	public void die(){
+		if(isBoss){
+			
+		}
+		else{
+			
+		}
+	}
 }
