@@ -30,7 +30,7 @@ public class Character extends GameObject {
 	@Override
 	public void tick(GameStateState gs) {
 		if(hp <= 0.0){
-			
+			gs.gameOver();
 		}
 
 	}
@@ -55,5 +55,8 @@ public class Character extends GameObject {
 		}
 	}
 	
+	public void handleUpgrade(Upgrade touched){
+		
+	}
 
 }
