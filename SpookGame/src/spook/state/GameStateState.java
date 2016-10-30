@@ -207,5 +207,8 @@ public class GameStateState extends GameState {
 	public List<GameObject> getGameObjects() {
 		return go;
 	}
-
+	public void win(){
+		JOptionPane.showMessageDialog(null, "You Win!");
+		this.getGame().setGameState(0);
+	}
 }
