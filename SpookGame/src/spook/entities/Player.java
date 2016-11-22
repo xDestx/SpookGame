@@ -203,6 +203,11 @@ public class Player extends GameObject implements Anchor, Renderable {
 		Color last = g.getColor();
 		g.setColor(Color.WHITE);
 		g.drawImage(ImageLoader.getImage("char.png"), xoff, yoff, (int)hitbox.getBounds().getWidth(),(int) hitbox.getBounds().getHeight(), null);
+		g.setColor(new Color(125, 38, 142));
+		g.drawRect(xoff, yoff-15, 100, 10);
+		g.setColor(Color.ORANGE);
+		g.fillRect(xoff+1, yoff-14, (int)(100 * (this.getCurrentHp() / this.getMaxHp())), 9);
+		
 		//	g.fillRect(xoff, yoff, (int)hitbox.getBounds().getWidth(),(int) hitbox.getBounds().getHeight());
 		
 	//	drawHitBoxes(g,xoff,yoff);

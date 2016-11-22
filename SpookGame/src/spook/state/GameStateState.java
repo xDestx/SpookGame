@@ -130,7 +130,7 @@ public class GameStateState extends GameState {
 		} catch (ConcurrentModificationException e)
 		{
 			//When you don't want to deal
-			e.printStackTrace();
+			//e.printStackTrace();
 			
 			//Continue
 		}

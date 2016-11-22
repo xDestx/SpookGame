@@ -1,5 +1,6 @@
 package spook.entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import spook.GameObject;
@@ -90,5 +91,9 @@ public class Enemy extends GameObject implements Renderable {
 		if(dead)
 			return;
 		g.drawImage(ImageLoader.getImage("ghost.png"), xoff, yoff, 70,70, null);
+		g.setColor(new Color(125, 38, 142));
+		g.drawRect(xoff, yoff-15, 100, 10);
+		g.setColor(Color.ORANGE);
+		g.fillRect(xoff+1, yoff-14, (int)(100 * (this.getCurrentHp() / this.getMaxHp())), 9);
 	}
 }
